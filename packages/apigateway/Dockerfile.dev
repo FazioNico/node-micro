@@ -1,0 +1,19 @@
+FROM node:8.9-alpine
+ENV NODE_VERSION 8.9.4
+# Create app directory
+RUN mkdir -p /usr/apigateway
+WORKDIR /usr/apigateway
+# install -g node modules
+RUN npm install -g typescript webpack
+# Copy .npm settings and package.json into container
+COPY package.json /usr/apigateway/package.json
+# install dependencies
+RUN npm install
+# move node_modules folder into the right place
+RUN mv /usr/apigateway/node_modules /node_modules
+# copy source files
+COPY . /usr/apigateway
+# expose container port
+EXPOSE 8080
+# build app in develeppement mode with live reload
+CMD ["npm", "run", "webpack:dev"]

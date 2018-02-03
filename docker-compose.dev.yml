@@ -1,0 +1,62 @@
+# Developement compose file (docker-compose.dev.yml)
+version: '3'
+
+services:
+
+  # proxy:
+  #   build: ./packages/proxy/
+  #   links:
+  #   ports:
+  #     - 80:80
+
+  apigateway:
+    build:
+      context: ./packages/apigateway/ # specify the directory of the Dockerfile
+      dockerfile: Dockerfile.dev
+    ports:
+      - 8080:8080 #specify ports forwarding
+    environment:
+      NODE_ENV: dev
+      PORT: 8080
+    volumes:
+      - ./packages/apigateway:/usr/apigateway
+
+  database: # name of the service
+    image: mongo # specify image to build container from
+
+  users:
+    build:
+      context: ./packages/users-service/ # specify the directory of the Dockerfile
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000 #specify ports forwarding
+    environment:
+      NODE_ENV: dev
+      DB: test
+      DB_SERVERS: database
+      PORT: 3000
+    links:
+      - database # link this service to the database service
+    volumes:
+      - ./packages/users-service:/usr/users-service
+    depends_on:
+      - database
+
+
+  todos:
+    build:
+      context: ./packages/todos-service/ # specify the directory of the Dockerfile
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3001:3001 #specify ports forwarding
+    environment:
+      NODE_ENV: dev
+      DB: test
+      DB_SERVERS: database
+      PORT: 3001
+    links:
+      - database # link this service to the database service
+    volumes:
+      - ./packages/todos-service:/usr/todos-service
+    depends_on:
+      - database

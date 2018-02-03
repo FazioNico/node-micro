@@ -1,0 +1,49 @@
+# Production compose file (docker-compose.yml)
+version: '3'
+
+services:
+
+  gateway:
+    build: ./packages/gateway/
+    links:
+      - users
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+      - users
+
+  database:
+    image: mongo
+
+  users:
+    build: ./packages/users-service/
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: prod
+      DB: test
+      DB_SERVERS: database
+      PORT: 3000
+    links:
+      - database
+    volumes:
+      - ./packages/users-service:/usr/users-service
+    depends_on:
+      - database
+
+  todos:
+    build: ./packages/todos-service/
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: prod
+      DB: test
+      DB_SERVERS: database
+      PORT: 3001
+    links:
+      - database
+    volumes:
+      - ./packages/todos-service:/usr/todos-service
+    depends_on:
+      - database
