@@ -40,14 +40,8 @@ export const proxyRoutes = async (app:express.Application, options)=> {
     }
 
     fetch(`${host}/${path}`, requestOptions)
-        .then((res)=> {
-          //if(res)
-            return res.json()
-        })
-        .then((json)=> {
-            console.log('http reverse proxy response: ', json);
-            res.status(200).json(json)
-        })
+        .then((res)=> res.json())
+        .then((json)=> res.status(200).json(json))
         .catch((err) => {
           console.log("Error requestAPI: " + err.message);
           res.status(500).json(err)
