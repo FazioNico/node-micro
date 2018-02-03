@@ -27,12 +27,15 @@ export const proxyRoutes = async (app:express.Application, options)=> {
     }
     const host:string = rtes.filter(r => r.path ===`/${req.url.split('/')[1]}`)[0].host;
     const path:string = req.url.split('/').filter(param => param !='').splice(1, 1).join('/');
+    const token: string = req.get('x-access-token') || req.get('authentication') || req.get('authorization') || undefined;
+
     let requestOptions:IRequestOptions = {
       method: req.method.toUpperCase(),
       body: req.body ,
-      // headers:{
-      //   'Content-type': 'application/json'
-      // },
+      headers:{
+        'Content-type': 'application/json',
+        'x-access-token': token
+      },
       //compress: true
     }
 
