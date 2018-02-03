@@ -5,8 +5,9 @@
   "main": "",
   "scripts": {
     "start": "npm run docker:dev",
-    "docker:dev": "docker-compose -f docker-compose.dev.yml build && docker-compose -f docker-compose.dev.yml up --build",
-    "docker:prod": "docker-compose build && docker-compose up --build",
+    "start:lerna": "lerna bootstrap",
+    "docker:dev": "npm run docker:down && docker-compose -f docker-compose.dev.yml build && docker-compose -f docker-compose.dev.yml up --build",
+    "docker:prod": "npm run docker:down && docker-compose down && docker-compose build && docker-compose up --build",
     "docker:down": "docker-compose -f docker-compose.dev.yml down",
     "docker:clean": "docker rm $(docker ps -a -q) && docker rmi $(docker images -q)",
     "release": "lerna publish --skip-npm",
