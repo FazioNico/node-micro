@@ -20,9 +20,15 @@ services:
       PORT: 8080
     volumes:
       - ./packages/apigateway:/usr/apigateway
+      - /var/run/docker.sock:/var/run/docker.sock
+    links:
+      - redis
 
   database: # name of the service
     image: mongo # specify image to build container from
+
+  redis:
+    image: redis
 
   users:
     build:

@@ -4,13 +4,13 @@ import * as helmet from 'helmet';
 import * as path from 'path';
 
 // TODO create proxy
-import { apiRoutes, proxyRoutes } from "../api";
+import { apiRoutes, proxyRoutes, discoverRoute } from "../api";
 
 export const start = (options):Promise<{server:any}> => {
   return new Promise((resolve, reject) => {
-    // if (!options.repo) {
-    //   reject(new Error('The server must be started with a connected repository'))
-    // }
+    if (!options.repo) {
+      reject(new Error('The server must be started with a connected repository'))
+    }
     if (!options.port) {
       reject(new Error('The server must be started with an available port'))
     }
@@ -37,6 +37,7 @@ export const start = (options):Promise<{server:any}> => {
     // TODO create route discoverer
     apiRoutes(app, options);
     proxyRoutes(app, options);
+    discoverRoute(app, options);
 
     const server = app.listen(options.port, () => resolve({server}))
   })

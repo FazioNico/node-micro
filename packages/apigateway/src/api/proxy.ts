@@ -17,15 +17,16 @@ export const proxyRoutes = async (app:express.Application, options)=> {
 
   app.use((req, res, next) => {
     // TODO: get rte from network memory staging or redis db. Using repo.db
-    let rtes:{path:string, host:string}[] = [
-      {path:'/users', host:'http://users:3000'},
-      {path:'/todos', host:'http://todos:3001'}
-    ];
-    if(!rtes.filter(r => r.path ===`/${req.url.split('/')[1]}`)[0]){
-      next()
-      return;
-    }
-    const host:string = rtes.filter(r => r.path ===`/${req.url.split('/')[1]}`)[0].host;
+    // let rtes:{path:string, host:string}[] = [
+    //   {path:'/users', host:'http://users:3000'},
+    //   {path:'/todos', host:'http://todos:3001'}
+    // ];
+    // if(!rtes.filter(r => r.path ===`/${req.url.split('/')[1]}`)[0]){
+    //   next()
+    //   return;
+    // }
+    // const host:string = rtes.filter(r => r.path ===`/${req.url.split('/')[1]}`)[0].host;
+
     const path:string = req.url.split('/').filter(param => param !='').splice(1, 1).join('/');
     const token: string = req.get('x-access-token') || req.get('authentication') || req.get('authorization') || undefined;
 
@@ -39,12 +40,25 @@ export const proxyRoutes = async (app:express.Application, options)=> {
       //compress: true
     }
 
-    fetch(`${host}/${path}`, requestOptions)
-        .then((res)=> res.json())
-        .then((json)=> res.status(200).json(json))
+    repo.find(req.url.split('/')[1])
+        .then(result=> {
+          console.log('repos find -->', `http://${result.label}:${result.port}/${path}`)
+          if(result){
+            return fetch(`http://${result.label}:${result.port}/${path}`, requestOptions)
+            .then((response)=> response.json())
+            .then((json)=> res.status(200).json(json))
+            .catch((err) => {
+              console.log("Error requestAPI: " + err.message);
+              res.status(500).json(err)
+            })
+          }
+          next()
+          return;
+        })
         .catch((err) => {
-          console.log("Error requestAPI: " + err.message);
-          res.status(500).json(err)
-        });
+          console.log("Error Route not existing: " + err.message);
+          res.status(500).json({code:500, msg: 'Error Route not existing or unactive: '+`/${req.url.split('/')[1]}/${path}`})
+        })
+
   })
 }

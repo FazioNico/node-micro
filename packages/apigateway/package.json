@@ -24,19 +24,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dockerode": "^2.5.3",
     "events": "^1.1.1",
     "express": "^4.16.2",
     "helmet": "^3.10.0",
-    "install": "^0.10.4",
-    "mongoose": "^5.0.1",
     "morgan": "^1.9.0",
     "node-fetch": "^1.7.3",
-    "npm": "^5.6.0"
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "@types/express": "^4.11.0",
     "@types/jasmine": "^2.8.5",
-    "@types/mongoose": "^4.7.33",
     "@types/node": "^9.3.0",
     "awesome-typescript-loader": "^3.4.1",
     "chai": "^4.1.2",

@@ -3,6 +3,7 @@ import * as morgan from 'morgan';
 import { EventEmitter } from 'events';
 
 import * as server  from "./server"
+import * as repository from "./repository";
 import { CONFIG } from "./config";
 
 const mediator:EventEmitter = new EventEmitter()
@@ -20,10 +21,18 @@ process.on('uncaughtException', (err) => {
 // })
 
 // listen event on db ready
-mediator.on('boot.ready', () => {
+mediator.on('db.ready', (db) => {
+  let rep;
   // DI to conect repository with database
-    server.start({
-      port: CONFIG.serverSettings.port,
+  repository.connect(db)
+    .then(repo=> {
+      console.log('--- Repository connected to database ---')
+      console.log('--- Starting Server ---')
+      rep = repo
+      return server.start({
+        port: CONFIG.serverSettings.port,
+        repo
+      })
     })
     .then(config => {
       console.log(`Server started succesfully, running on port: ${CONFIG.serverSettings.port}  🎉`)
@@ -37,5 +46,6 @@ mediator.on('boot.ready', () => {
     });
 })
 
+CONFIG.db.connect(CONFIG.dbSettings, mediator)
 // Server body ready... emit event to connect database with repository
 mediator.emit('boot.ready')

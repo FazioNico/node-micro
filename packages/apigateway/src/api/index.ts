@@ -1,5 +1,6 @@
 import * as express from 'express'
 export * from './proxy';
+export * from './discoverer';
 
 export const apiRoutes = async (app:express.Application, options)=> {
   const {repo} = options;
