@@ -50,8 +50,6 @@ workflows:
           filters:
             branches:
               only: dev
-            commands:
-              - git push master
 
       # - deploy-job:
       #     requires:
