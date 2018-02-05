@@ -36,7 +36,6 @@ jobs:
       # run tests!
       # - run: yarn test
       # - run lerna run build:server
-      - run:
       - run: git config --global user.email "contact@nicolasfazio.ch"
       - run: git config --global user.name "FazioNico"
       - run: lerna publish --yes --skip-npm  --cd-version patch
