@@ -48,7 +48,8 @@ workflows:
     jobs:
       - build-job:
           filters:
-            branch: dev
+            branches:
+              only:  dev
             commands:
               - git push master
 
