@@ -37,9 +37,8 @@ jobs:
       # - run: yarn test
       # - run lerna run build:server
       - run:
-          command: |
-          git config --global user.email "contact@nicolasfazio.ch"
-          git config --global user.name "FazioNico"
+      - run: git config --global user.email "contact@nicolasfazio.ch"
+      - run: git config --global user.name "FazioNico"
       - run: lerna publish --yes --skip-npm  --cd-version patch
       # - run: git merge
 
