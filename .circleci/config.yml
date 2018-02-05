@@ -35,14 +35,14 @@ jobs:
       # run tests!
       # - run: yarn test
       # - run lerna run build:server
-      - run: lerna publish -m "chore(release): publish %s" --skip-npm  --cd-version patch
-      # - run: git merge 
+      - run: lerna publish --skip-npm  --cd-version patch
+      # - run: git merge
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build-job
+      - build-job:
           filters:
             branches:
               only: master
