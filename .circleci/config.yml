@@ -49,7 +49,7 @@ workflows:
       - build-job:
           filters:
             branches:
-              only:  dev
+              only: dev
             commands:
               - git push master
 
