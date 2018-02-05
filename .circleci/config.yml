@@ -47,8 +47,10 @@ workflows:
     jobs:
       - build-job:
           filters:
-            branches:
-              only: master
+            branch: dev # /feature-.*/
+            commands:
+              - git push master 
+
       # - deploy-job:
       #     requires:
       #       - build-job
