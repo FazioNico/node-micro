@@ -39,7 +39,7 @@ jobs:
       - run: git config --global user.email "contact@nicolasfazio.ch"
       - run: git config --global user.name "FazioNico"
       - run: lerna publish --yes --skip-npm  --cd-version patch
-      # - run: git merge
+      - run: git push master
       #
 
 workflows:
