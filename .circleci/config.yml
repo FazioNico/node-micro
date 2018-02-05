@@ -47,8 +47,10 @@ workflows:
     jobs:
       - build-job:
           filters:
-            branches:
-              only: master
+            branch: /feature_.*/
+            commands:
+              - git pull origin develop
+
       # - deploy-job:
       #     requires:
       #       - build-job
