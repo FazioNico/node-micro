@@ -36,12 +36,17 @@ jobs:
       # run tests!
       # - run: yarn test
       # - run lerna run build:server
-      - run: git config --global user.email "contact@nicolasfazio.ch"
-      - run: git config --global user.name "FazioNico"
+      - run: git config --global user.email "$USER_EMAIL"
+      - run: git config --global user.name "$USER_NAME"
       - run: lerna publish --yes --skip-npm  --cd-version patch
-      - run: git push origin master
       #
-
+      # Deploy production
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "dev" ];
+              then ./scripts/release.sh production;
+            fi
+            
 workflows:
   version: 2
   build_and_deploy:
