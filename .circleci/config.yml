@@ -16,6 +16,10 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - add-ssh-keys:
+          fingerprints:
+            - $ID_RSA
+
       - checkout
 
       # Download and cache dependencies
@@ -46,7 +50,7 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "dev" ];
               then ./scripts/release.sh production;
             fi
-            
+
 workflows:
   version: 2
   build_and_deploy:
