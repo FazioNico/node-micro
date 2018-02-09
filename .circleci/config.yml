@@ -1,6 +1,7 @@
 
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
+
 version: 2
 jobs:
   install:
@@ -31,7 +32,7 @@ jobs:
   #     - setup_remote_docker:
   #         docker_layer_caching: true
   #     - run: sh scripts/build-images.sh
-  
+
 workflows:
   version: 2
   install_test:
