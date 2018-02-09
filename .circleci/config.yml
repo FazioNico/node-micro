@@ -16,6 +16,10 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - add-ssh-keys:
+          fingerprints:
+            - $ID_RSA
+
       - checkout
 
       # Download and cache dependencies
@@ -36,10 +40,16 @@ jobs:
       # run tests!
       # - run: yarn test
       # - run lerna run build:server
-      - run: git config --global user.email "contact@nicolasfazio.ch"
-      - run: git config --global user.name "FazioNico"
+      - run: git config --global user.email "$USER_EMAIL"
+      - run: git config --global user.name "$USER_NAME"
       - run: lerna publish --yes --skip-npm  --cd-version patch
-      # - run: git merge
+      #
+      # Deploy production
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "dev" ];
+              then ./scripts/release.sh production;
+            fi
 
 workflows:
   version: 2
@@ -47,9 +57,8 @@ workflows:
     jobs:
       - build-job:
           filters:
-            branch: dev # /feature-.*/
-            commands:
-              - git push master 
+            branches:
+              only: dev
 
       # - deploy-job:
       #     requires:
