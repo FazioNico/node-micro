@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-npm install
+yarn install --silent --non-interactive --no-lockfile

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-npm install
-npm run test
+yarn install --silent --non-interactive --no-lockfile
+yarn run test

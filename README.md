@@ -6,6 +6,5 @@ Testing Microservices develeppement and production workfolw with Docker and more
 ## Install Dev
 ```
 $ git clone
-$ bash scripts/install.sh
 $ npm start
 ```
