@@ -1,19 +1,17 @@
 FROM node:8.9-alpine
 ENV NODE_VERSION 8.9.4
 # Create app directory
-RUN mkdir -p /usr/users-service
+RUN mkdir -p /usr/users-service/platforms/server
 WORKDIR /usr/users-service
-# install -g node modules
-RUN npm install -g typescript webpack
 # Copy .npm settings and package.json into container
 COPY package.json /usr/users-service/package.json
 # install dependencies
-RUN npm install
+RUN npm install --production
 # move node_modules folder into the right place
 RUN mv /usr/users-service/node_modules /node_modules
-# copy source files
-COPY . /usr/users-service
+# copy source files (or maybe get it from circleci artefact?)
+COPY ./platforms/server /usr/users-service/platforms/server
 # expose container port
 EXPOSE 3000
-# build app in develeppement mode with live reload
-CMD ["npm", "run", "build:server"]
+# run app in production mode
+CMD ["npm", "run", "start"]
