@@ -6,7 +6,11 @@ for dir in $(ls -d  packages/*); do
   cd $dir
   echo "[INSTALL] $(pwd | sed 's#.*/##') microservice: packages dependencies"
   # install project dependencies
-  npm install
+  bash ./tools/config/circleci.install.sh
   # return to rootDirectory project
   cd $rootDirectory
 done
+
+echo '----------------------------------------------------'
+echo '----------------------------------------------------'
+echo '[SUCCESS] Project dependencies install with success!'
