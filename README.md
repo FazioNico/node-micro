@@ -6,7 +6,5 @@ Testing Microservices develeppement and production workfolw with Docker and more
 ## Install Dev
 ```
 $ git clone
-$ nvm use 7
-$ lerna bootstrap
 $ npm start
 ```

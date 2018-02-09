@@ -28,6 +28,8 @@ plugins/android.json
 plugins/ios.json
 www/
 $RECYCLE.BIN/
+coverage/
+.nyc_output/
 
 .DS_Store
 Thumbs.db
