@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - checkout
-      - run: bash script/install.sh
+      - run: bash scripts/install.sh
 
   test:
     docker:
