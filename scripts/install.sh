@@ -6,7 +6,8 @@ for dir in $(ls -d  packages/*); do
   cd $dir
   echo "[INSTALL] $(pwd | sed 's#.*/##') microservice: packages dependencies"
   # install project dependencies
-  bash ./tools/config/circleci.install.sh
+  docker build -t $(pwd | sed 's#.*/##') -f /Dockerfile.dev .
+  # bash ./tools/config/circleci.install.sh
   # return to rootDirectory project
   cd $rootDirectory
 done

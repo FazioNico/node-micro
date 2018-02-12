@@ -16,4 +16,4 @@ COPY . /usr/users-service
 # expose container port
 EXPOSE 3000
 # build app in develeppement mode with live reload
-CMD ["npm", "run", "webpack:dev"]
+  CMD ["npm", "run", "webpack:dev"]
