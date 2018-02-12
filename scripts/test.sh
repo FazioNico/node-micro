@@ -8,7 +8,7 @@ for dir in $(ls -d  packages/*); do
   echo "[TEST] ${serviceName} microservice"
   # run test
   docker load < ~/repo/docker-cache/${serviceName}.tar
-  docker run ${serviceName} -c 'sh tools/config/circleci.test.sh'
+  docker run --entrypoint '/bin/sh' ${serviceName} -c 'sh tools/config/circleci.test.sh'
   # bash ./tools/config/circleci.test.sh
   # return to rootDirectory project
   cd $rootDirectory
