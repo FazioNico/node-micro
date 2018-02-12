@@ -6,7 +6,7 @@ for dir in $(ls -d  packages/*); do
   cd $dir
   echo "[TEST] $(pwd | sed 's#.*/##') microservice"
   # run test
-  docker run $(pwd | sed 's#.*/##') -c 'bash circleci.test.sh'
+  docker run $(pwd | sed 's#.*/##') -c 'sh tools/config/circleci.test.sh'
   # bash ./tools/config/circleci.test.sh
   # return to rootDirectory project
   cd $rootDirectory
