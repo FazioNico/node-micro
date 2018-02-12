@@ -4,9 +4,14 @@ rootDirectory=$(pwd)
 for dir in $(ls -d  packages/*); do
   # go to microservice folder
   cd $dir
-  echo "[INSTALL] $(pwd | sed 's#.*/##') microservice: packages dependencies"
+  serviceName=$(pwd | sed 's#.*/##')
+
+  echo "[INSTALL] ${serviceName} microservice: packages dependencies"
   # install project dependencies
-  docker build -t $(pwd | sed 's#.*/##') -f Dockerfile.dev . 
+  docker build -f Dockerfile.dev -t ${serviceName} .
+  mkdir -p docker-cache
+  docker save -o docker-cache/${serviceName}.tar ${serviceName}
+
   # bash ./tools/config/circleci.install.sh
   # return to rootDirectory project
   cd $rootDirectory

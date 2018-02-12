@@ -14,7 +14,10 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: sh scripts/install.sh
-
+      - save_cache:
+          key: docker_cache_key
+          paths:
+            - docker-cache
   test:
     docker:
       - image: docker:18.01.0-ce-git
@@ -23,6 +26,9 @@ jobs:
 
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - docker_cache_key
       - setup_remote_docker:
           docker_layer_caching: true
       - run: sh scripts/test.sh

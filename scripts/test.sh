@@ -4,9 +4,11 @@ rootDirectory=$(pwd)
 for dir in $(ls -d  packages/*); do
   # go to microservice folder
   cd $dir
-  echo "[TEST] $(pwd | sed 's#.*/##') microservice"
+  serviceName=$(pwd | sed 's#.*/##')
+  echo "[TEST] ${serviceName} microservice"
   # run test
-  docker run $(pwd | sed 's#.*/##') -c 'sh tools/config/circleci.test.sh'
+  docker load < docker-cache/${serviceName}.tar
+  docker run ${serviceName} -c 'sh tools/config/circleci.test.sh'
   # bash ./tools/config/circleci.test.sh
   # return to rootDirectory project
   cd $rootDirectory
