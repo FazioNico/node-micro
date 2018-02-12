@@ -15,9 +15,9 @@ jobs:
           docker_layer_caching: true
       - run: sh scripts/install.sh
       - persist_to_workspace:
-          root: ~/repo/docker-cache
+          root: .
           paths:
-            - docker
+            - docker-cache
 
   test:
     docker:
@@ -31,7 +31,7 @@ jobs:
           docker_layer_caching: true
 
       - attach_workspace:
-          at: ~/repo/docker-cache
+          at: ~/repo
       - run: sh scripts/test.sh
 
   # deploy:
