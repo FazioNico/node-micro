@@ -2,7 +2,7 @@
 
 yarn install --silent --non-interactive --no-lockfile
 # build production
-yarn run webpack:prod
+yarn run build:server
 # copy dist/ folder to .workflows cache directory
 serviceName=$(pwd | sed 's#.*/##')
 mkdir -p ~/repo/docker-cache/${serviceName}/platforms/server

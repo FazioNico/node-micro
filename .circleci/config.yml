@@ -39,11 +39,11 @@ jobs:
           docker_layer_caching: true
       - attach_workspace:
           at: ~/repo
+      - run: sh scripts/build-service.sh
       - persist_to_workspace:
           root: .
           paths:
             - docker-cache
-      - run: sh scripts/build-service.sh
 
   build-image-and-deploy:
     docker:
