@@ -14,10 +14,11 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: sh scripts/install.sh
-      - save_cache:
-          key: docker_cache_key
+      - persist_to_workspace:
+          root: /home/circleci
           paths:
-            - docker-cache
+            - docker
+
   test:
     docker:
       - image: docker:18.01.0-ce-git
@@ -28,9 +29,9 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      - restore_cache:
-          keys:
-            - docker_cache_key
+
+      - attach_workspace:
+          at: /home/circleci
       - run: sh scripts/test.sh
 
   # deploy:
