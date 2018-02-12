@@ -26,11 +26,11 @@ jobs:
 
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - restore_cache:
           keys:
             - docker_cache_key
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run: sh scripts/test.sh
 
   # deploy:
