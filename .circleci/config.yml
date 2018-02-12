@@ -29,17 +29,17 @@ jobs:
           at: ~/repo
       - run: sh scripts/test.sh
 
-  # build-service:
-  #   docker:
-  #     - image: docker:18.01.0-ce-git
-  #   working_directory: ~/repo
-  #   steps:
-  #     - checkout
-  #     - setup_remote_docker:
-  #         docker_layer_caching: true
-  #     - attach_workspace:
-  #         at: ~/repo
-  #     - run: sh scripts/build-service.sh
+  build-service:
+    docker:
+      - image: docker:18.01.0-ce-git
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - attach_workspace:
+          at: ~/repo
+      - run: sh scripts/build-service.sh
 
   # deploy:
   #   docker:
