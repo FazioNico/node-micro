@@ -8,9 +8,9 @@ for dir in $(ls -d  packages/*); do
 
   echo "[INSTALL] ${serviceName} microservice: packages dependencies"
   # install project dependencies
-  docker build -f Dockerfile.dev -t ${serviceName} . 
-  mkdir -p docker-cache
-  docker save -o docker-cache/${serviceName}.tar ${serviceName}
+  docker build -f Dockerfile.dev -t ${serviceName} .
+  mkdir -p ~/repo/docker-cache
+  #docker save -o docker-cache/${serviceName}.tar ${serviceName}
 
   # bash ./tools/config/circleci.install.sh
   # return to rootDirectory project
