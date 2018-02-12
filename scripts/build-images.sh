@@ -4,10 +4,20 @@ rootDirectory=$(pwd)
 for dir in $(ls -d  packages/*); do
   # go to microservice folder
   cd $dir
+  serviceName=$(pwd | sed 's#.*/##')
   # build image
   if [ -f ./tools/config/circleci.build-images.sh ]; then
-    echo "[BUILD-IMAGES] $(pwd | sed 's#.*/##') microservice"
-    bash ./tools/config/circleci.build-images.sh
+    echo "[BUILD-IMAGES] ${serviceName} microservice"
+    # bash ./tools/config/circleci.build-images.sh
+    # tag image
+    TAG=0.1.$CIRCLE_BUILD_NUM
+    # build docker image
+    docker build -t registry.agenda.ch/fazio/$servicename:$TAG  .
+    # login to docker hub
+    docker login registry.agenda.ch -u $USER_DOCKER -p $PASS_DOCKER
+    echo "[DEPLOY-IMAGES] ${serviceName} microservice"
+    # push docker image
+    docker push registry.agenda.ch/fazio/$servicename:$TAG
   fi
   # return to rootDirectory project
   cd $rootDirectory
