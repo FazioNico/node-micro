@@ -1,5 +1,6 @@
 # defin project rootDirectory
 rootDirectory=$(pwd)
+mkdir -p ~/repo/docker-cache
 # do loop for each microservice found into packages folder
 for dir in $(ls -d  packages/*); do
   # go to microservice folder
@@ -9,8 +10,8 @@ for dir in $(ls -d  packages/*); do
   echo "[INSTALL] ${serviceName} microservice: packages dependencies"
   # install project dependencies
   docker build -f Dockerfile.dev -t ${serviceName} .
-  # mkdir -p docker-cache
-  # docker save -o docker-cache/${serviceName}.tar ${serviceName}
+
+  docker save -o ~/repo/docker-cache/${serviceName}.tar ${serviceName}
 
   # bash ./tools/config/circleci.install.sh
   # return to rootDirectory project

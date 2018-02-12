@@ -7,7 +7,7 @@ for dir in $(ls -d  packages/*); do
   serviceName=$(pwd | sed 's#.*/##')
   echo "[TEST] ${serviceName} microservice"
   # run test
-  # docker load < docker-cache/${serviceName}.tar
+  docker load < ~/repo/docker-cache/${serviceName}.tar
   docker run ${serviceName} -c 'sh tools/config/circleci.test.sh'
   # bash ./tools/config/circleci.test.sh
   # return to rootDirectory project
