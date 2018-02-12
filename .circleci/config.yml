@@ -15,7 +15,7 @@ jobs:
           docker_layer_caching: true
       - run: sh scripts/install.sh
       - persist_to_workspace:
-          root: /home/circleci
+          root: docker-cache
           paths:
             - docker
 
@@ -31,7 +31,7 @@ jobs:
           docker_layer_caching: true
 
       - attach_workspace:
-          at: /home/circleci
+          at: docker-cache
       - run: sh scripts/test.sh
 
   # deploy:
