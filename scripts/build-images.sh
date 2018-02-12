@@ -12,12 +12,12 @@ for dir in $(ls -d  packages/*); do
     # tag image
     TAG=0.1.$CIRCLE_BUILD_NUM
     # build docker image
-    docker build -t registry.agenda.ch/fazio/$servicename:$TAG  .
+    docker build -t registry.agenda.ch/fazio/$serviceName:$TAG  .
     # login to docker hub
     docker login registry.agenda.ch -u $USER_DOCKER -p $PASS_DOCKER
     echo "[DEPLOY-IMAGES] ${serviceName} microservice"
     # push docker image
-    docker push registry.agenda.ch/fazio/$servicename:$TAG
+    docker push registry.agenda.ch/fazio/$serviceName:$TAG
   fi
   # return to rootDirectory project
   cd $rootDirectory
