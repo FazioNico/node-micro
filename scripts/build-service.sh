@@ -9,9 +9,19 @@ rootDirectory=$(pwd)
   echo "[BUILD SERVICE] ${serviceName} microservice"
   # run test
   docker load < $rootDirectory/docker-cache/${serviceName}.tar
+
   # docker run ${serviceName} sh -c './tools/config/circleci.build-service.sh'
   docker run --entrypoint '/bin/sh' ${serviceName} -c 'sh tools/config/circleci.build-service.sh'
 
+
+  # tag image
+  TAG=0.1.$CIRCLE_BUILD_NUM
+  # build docker image
+  docker build -t registry.agenda.ch/fazio/$serviceName:$TAG  .
+  # login to docker hub
+  docker login registry.agenda.ch -u $USER_DOCKER -p $PASS_DOCKER
+  # push docker image
+  docker push registry.agenda.ch/fazio/$serviceName:$TAG
   # return to rootDirectory project
   cd $rootDirectory
 # done
