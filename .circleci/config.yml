@@ -40,22 +40,23 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: sh scripts/build-service.sh
-      - persist_to_workspace:
-          root: .
-          paths:
-            - docker-cache
-
-  build-image-and-deploy:
-    docker:
-      - image: docker:18.01.0-ce-git
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - attach_workspace:
-          at: ~/repo
       - run: sh scripts/build-images.sh
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #       - docker-cache
+
+  # build-image-and-deploy:
+  #   docker:
+  #     - image: docker:18.01.0-ce-git
+  #   working_directory: ~/repo
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker:
+  #         docker_layer_caching: true
+  #     - attach_workspace:
+  #         at: ~/repo
+  #     - run: sh scripts/build-images.sh
   # deploy:
   #   docker:
   #     - image: docker:18.01.0-ce-git
@@ -77,9 +78,17 @@ workflows:
       - build-service:
           requires:
             - test
-      - build-image-and-deploy:
-          requires:
-            - build-service
+      # - build-image-and-deploy:
+      #     requires:
+      #       - build-service
+
+  # build_deploy:
+  #   jobs:
+  #     - install
+  #     - build-service:
+  #         requires:
+  #           - install
+  #
       # - deploy:
       #     requires:
       #       - install
