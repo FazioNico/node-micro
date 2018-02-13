@@ -37,6 +37,17 @@ jobs:
           at: .
       - run: sh scripts/build-service.sh
 
+  # build-prod:
+  #   machine:
+  #       enabled: true
+  #       docker_layer_caching: true
+  #   working_directory: /tmp/repo
+  #   steps:
+  #     - checkout
+  #     - attach_workspace:
+  #         at: .
+  #     - run: sh scripts/build-service.sh
+
   # build-image-and-deploy:
   #   docker:
   #     - image: docker:18.01.0-ce-git
@@ -69,7 +80,11 @@ workflows:
       - build-service:
           requires:
             - test
-
+          filters:
+            branches:
+              only:
+                - master # /feature-.*/
+      #
       # - build-image-and-deploy:
       #     requires:
       #       - build-service
