@@ -46,10 +46,10 @@ jobs:
       - attach_workspace:
           at: .
       - run: sh scripts/test.sh
-      - persist_to_workspace:
-          root: .
-          paths:
-            - docker-cache
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #       - docker-cache
 
   build-service:
     docker:

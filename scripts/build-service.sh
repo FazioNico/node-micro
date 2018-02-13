@@ -8,7 +8,7 @@ rootDirectory=$(pwd)
   serviceName=$(pwd | sed 's#.*/##')
   echo "[BUILD SERVICE] ${serviceName} microservice"
   # run test
-  docker load < ./docker-cache/${serviceName}.tar
+  docker load < $rootDirectory/docker-cache/${serviceName}.tar
   docker run ${serviceName} sh -c './tools/config/circleci.build-service.sh'
 
   # return to rootDirectory project
