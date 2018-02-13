@@ -83,7 +83,7 @@ workflows:
       - install
       - build-service:
           requires:
-            - test
+            - install
   #
       # - deploy:
       #     requires:
