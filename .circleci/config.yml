@@ -24,7 +24,7 @@ jobs:
   install:
     docker:
       - image: docker:18.01.0-ce-git
-    working_directory: /tmp/repo
+    working_directory: /home/repo
     steps:
       - checkout
       - setup_remote_docker:
@@ -38,7 +38,7 @@ jobs:
   test:
     docker:
       - image: docker:18.01.0-ce-git
-    working_directory: /tmp/repo
+    working_directory: /home/repo
     steps:
       - checkout
       - setup_remote_docker:
@@ -56,7 +56,7 @@ jobs:
     #   - image: docker:18.01.0-ce-git
     machine:
         enabled: true
-    working_directory: /tmp/repo
+    working_directory: /home/repo
     steps:
       - checkout
       # - setup_remote_docker:
