@@ -10,6 +10,8 @@ rootDirectory=$(pwd)
   # run test
   docker load < $rootDirectory/docker-cache/${serviceName}.tar
 
+  export VAR1=value1
+  export VAR2=value2
   # docker run ${serviceName} sh -c './tools/config/circleci.build-service.sh'
   docker run -v $(pwd):/usr/${serviceName}  --entrypoint '/bin/sh' ${serviceName} -c 'sh tools/config/circleci.build-service.sh'
 
@@ -19,7 +21,7 @@ rootDirectory=$(pwd)
   # build docker image
   docker build -t registry.agenda.ch/fazio/$serviceName:$TAG  .
   # login to docker hub
-  docker login registry.agenda.ch -u ${USER_DOCKER} -p ${PASS_DOCKER}
+  docker login registry.agenda.ch -u fazio -p Agenda.ch2018
   # push docker image
   docker push registry.agenda.ch/fazio/$serviceName:$TAG
   # return to rootDirectory project
