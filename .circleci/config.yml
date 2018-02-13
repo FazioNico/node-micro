@@ -29,6 +29,7 @@ jobs:
   build-service:
     machine:
         enabled: true
+        docker_layer_caching: true
     working_directory: /tmp/repo
     steps:
       - checkout
