@@ -52,8 +52,10 @@ jobs:
       #       - docker-cache
 
   build-service:
-    docker:
-      - image: docker:18.01.0-ce-git
+    # docker:
+    #   - image: docker:18.01.0-ce-git
+    machine:
+        enabled: true
     working_directory: /tmp/repo
     steps:
       - checkout

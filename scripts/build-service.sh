@@ -11,7 +11,7 @@ rootDirectory=$(pwd)
   docker load < $rootDirectory/docker-cache/${serviceName}.tar
 
   # docker run ${serviceName} sh -c './tools/config/circleci.build-service.sh'
-  docker run --entrypoint '/bin/sh' ${serviceName} -c 'sh tools/config/circleci.build-service.sh'
+  docker run --entrypoint -v ./:/usr/${serviceName} '/bin/sh' ${serviceName} -c 'sh tools/config/circleci.build-service.sh'
 
 
   # tag image
