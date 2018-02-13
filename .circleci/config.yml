@@ -79,7 +79,7 @@ workflows:
             - install
       - build-service:
           requires:
-            - test
+            - install
           filters:
             branches:
               only:
