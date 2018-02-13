@@ -66,9 +66,9 @@ workflows:
       - test:
           requires:
             - install
-      # - build-service:
-      #     requires:
-      #       - install
+      - build-service:
+          requires:
+            - install
 
       # - build-image-and-deploy:
       #     requires:
@@ -78,12 +78,7 @@ workflows:
       #         only:
       #           - master # /feature-.*/
 
-  build_deploy:
-    jobs:
-      - install
-      - build-service:
-          requires:
-            - install
+
   #
       # - deploy:
       #     requires:
