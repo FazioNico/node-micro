@@ -21,7 +21,8 @@ rootDirectory=$(pwd)
   # build docker image
   docker build -t registry.agenda.ch/fazio/$serviceName:$TAG  .
   # login to docker hub
-  docker login registry.agenda.ch -u fazio -p Agenda.ch2018
+  echo "${USER_DOCKER}  -  ${PASS_DOCKER}"
+  docker login registry.agenda.ch -u ${USER_DOCKER} -p ${PASS_DOCKER}
   # push docker image
   docker push registry.agenda.ch/fazio/$serviceName:$TAG
   # return to rootDirectory project
