@@ -68,12 +68,16 @@ workflows:
             - install
       - build-service:
           requires:
-            - test
+            - install
 
       # - build-image-and-deploy:
       #     requires:
       #       - build-service
-
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master # /feature-.*/
+      
   # build_deploy:
   #   jobs:
   #     - install
