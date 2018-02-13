@@ -89,13 +89,13 @@ workflows:
   install_test:
     jobs:
       - install
-      # - test:
-      #     requires:
-      #       - install
-      # - build-service:
-      #     requires:
-      #       - test
-      
+      - test:
+          requires:
+            - install
+      - build-service:
+          requires:
+            - test
+
       # - build-image-and-deploy:
       #     requires:
       #       - build-service
