@@ -12,7 +12,7 @@ mkdir docker-cache
   # install project dependencies
   docker build -f Dockerfile.dev -t ${serviceName} .
 
-  docker save -o docker-cache/${serviceName}.tar ${serviceName}
+  docker save -o $rootDirectory/docker-cache/${serviceName}.tar ${serviceName}
 
   # bash ./tools/config/circleci.install.sh
   # return to rootDirectory project
