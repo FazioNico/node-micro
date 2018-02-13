@@ -4,7 +4,7 @@ ENV NODE_VERSION 8.9.4
 RUN mkdir -p /usr/users-service
 WORKDIR /usr/users-service
 # install -g node modules
-RUN yarn global add typescript webpack
+RUN yarn global add typescript webpack nyc
 # Copy .npm settings and package.json into container
 COPY package.json /usr/users-service/package.json
 # install dependencies

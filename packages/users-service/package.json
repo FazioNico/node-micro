@@ -16,8 +16,8 @@
     "webpack:dev": "webpack --watch --config ./tools/config/server.webpack.js --env.dev",
     "webpack:prod": "NODE_ENV=prod webpack --config ./tools/config/server.webpack.js --env.prod",
     "e2e": "node_modules/.bin/mocha e2e/index.js",
-    "test": "NODE_ENV=test node_modules/.bin/nyc mocha-webpack --timeout 100000 --webpack-config ./tools/config/server.webpack.js  \"src/**/*.spec.ts\" --webpack-env.test",
-    "coveralls": "NODE_ENV=test node_modules/.bin/nyc report && cat ./coverage/lcov.info | coveralls",
+    "test": "NODE_ENV=test nyc mocha-webpack --timeout 100000 --webpack-config ./tools/config/server.webpack.js  \"src/**/*.spec.ts\" --webpack-env.test",
+    "coveralls": "NODE_ENV=test nyc report && cat ./coverage/lcov.info | coveralls",
     "doc:rest": "apidoc -i src/app/ -f '.*\\.docs.ts$' -o docs/rest"
   },
   "keywords": [],
