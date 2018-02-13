@@ -1,9 +1,10 @@
 # defin project rootDirectory
 rootDirectory=$(pwd)
 # do loop for each microservice found into packages folder
-for dir in $(ls -d  packages/*); do
+# for dir in $(ls -d  packages/*); do
   # go to microservice folder
-  cd $dir
+  # cd $dir
+  cd packages/users-service
   serviceName=$(pwd | sed 's#.*/##')
   # build image
   if [ -f ./tools/config/circleci.build-images.sh ]; then
@@ -21,4 +22,4 @@ for dir in $(ls -d  packages/*); do
   fi
   # return to rootDirectory project
   cd $rootDirectory
-done
+# done
