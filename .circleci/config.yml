@@ -40,7 +40,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: sh scripts/build-service.sh
-      - run: sh scripts/build-images.sh
+      # - run: sh scripts/build-images.sh
       # - persist_to_workspace:
       #     root: .
       #     paths:

@@ -11,7 +11,7 @@ RUN yarn install --production
 RUN mv /usr/users-service/node_modules /node_modules
 # copy source files (or maybe get it from circleci artefact?)
 # RUN tar -xvf ~repo/docker-cache/users-service-build.tar -C /usr/users-service
-COPY ./platforms/server /usr/users-service/platforms/server
+COPY platforms/server /usr/users-service/platforms/server
 # expose container port
 EXPOSE 3000
 # run app in production mode
