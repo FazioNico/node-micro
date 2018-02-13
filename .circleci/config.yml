@@ -1,4 +1,22 @@
+# version: 2
+# jobs:
+#   install:
+#     docker:
+#       - image: docker:18.01.0-ce-git
+#     working_directory: ~/repo
+#     steps:
+#       - checkout
+#       - run:
+#           name: Do all the things
+#           command: |
+#             rootDirectory=$(pwd)
+#             cd packages/users-service
+#             serviceName=$(pwd | sed 's#.*/##')
+#             echo "[INSTALL] ${serviceName} microservice: packages dependencies"
+#             docker build -f Dockerfile.dev -t ${serviceName} .
+#
 
+#
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
@@ -40,7 +58,6 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: sh scripts/build-service.sh
-      # - run: sh scripts/build-images.sh
       # - persist_to_workspace:
       #     root: .
       #     paths:

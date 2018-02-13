@@ -10,7 +10,7 @@ mkdir -p ~/repo/docker-cache
   echo "[BUILD SERVICE] ${serviceName} microservice"
   # run test
   docker load < ~/repo/docker-cache/${serviceName}.tar
-  docker run --entrypoint '/bin/sh' ${serviceName} -c 'sh tools/config/circleci.build-service.sh'
+  docker run -v ~repo:/usr/${serviceName} --entrypoint '/bin/sh' ${serviceName} -c 'sh tools/config/circleci.build-service.sh'
 
   # return to rootDirectory project
   cd $rootDirectory
