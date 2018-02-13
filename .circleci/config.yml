@@ -68,7 +68,7 @@ workflows:
             - install
       - build-service:
           requires:
-            - install
+            - test
 
       # - build-image-and-deploy:
       #     requires:

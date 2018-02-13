@@ -9,9 +9,6 @@ rootDirectory=$(pwd)
   echo "[BUILD SERVICE] ${serviceName} microservice"
   # run test
   docker load < $rootDirectory/docker-cache/${serviceName}.tar
-
-  export VAR1=value1
-  export VAR2=value2
   # docker run ${serviceName} sh -c './tools/config/circleci.build-service.sh'
   docker run -v $(pwd):/usr/${serviceName}  --entrypoint '/bin/sh' ${serviceName} -c 'sh tools/config/circleci.build-service.sh'
 
