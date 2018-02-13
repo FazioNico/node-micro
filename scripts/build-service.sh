@@ -1,5 +1,6 @@
 # defin project rootDirectory
 rootDirectory=$(pwd)
+mkdir -p ~/repo/docker-cache
 # do loop for each microservice found into packages folder
 # for dir in $(ls -d  packages/*); do
   # go to microservice folder
