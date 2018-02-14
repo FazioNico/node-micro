@@ -77,6 +77,10 @@ workflows:
       - test:
           requires:
             - install
+          filters:
+            branches:
+              ignore:
+                - master # /feature-.*/
       - build-service:
           requires:
             - install
