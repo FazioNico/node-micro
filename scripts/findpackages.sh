@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # find packages changed
-latestRef=$(git log master -1 --format="%H")
+latestRef=$(git log origin/master -1 --format="%H")
 latestCmt=$(git log -1 --format="%H")
 echo $latestRef
 echo $latestCmt
