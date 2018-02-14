@@ -13,3 +13,5 @@ packages=$(git diff --name-only ${SHA1} ${SHA2} -- packages  | awk '{ split($0,a
 for dir in $(ls -d  packages/*); do
   echo $dir
 done
+
+#
