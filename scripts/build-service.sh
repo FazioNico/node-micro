@@ -1,6 +1,6 @@
 #!/bin/bash
 
-latestRef=$(git log origin/master -2 --format="%H")
+latestRef=$(git rev-parse HEAD^)
 latestCmt=$(git log origin/master -1 --format="%H")
 echo $latestRef
 echo $latestCmt
