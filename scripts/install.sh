@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $(pwd)/scripts/findpackages.sh
+source ./findpackages.sh
 echo  $packages | sed 's#.*/##'
 
 # defin project rootDirectory
