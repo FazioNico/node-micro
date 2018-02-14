@@ -10,3 +10,4 @@ docker build -t registry.agenda.ch/fazio/$servicename:$TAG  .
 docker login registry.agenda.ch -u $USER_DOCKER -p $PASS_DOCKER
 # push docker image
 docker push registry.agenda.ch/fazio/$servicename:$TAG
+#
