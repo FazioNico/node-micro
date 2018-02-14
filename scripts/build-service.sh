@@ -1,10 +1,11 @@
 #!/bin/bash
 
-latestRef=$(git log origin/master -2 --format="%H")
+latestRef=$(git rev-parse HEAD^)
 latestCmt=$(git log origin/master -1 --format="%H")
-echo $latestRef
-echo $latestCmt
+echo "latestRef-> ${latestRef}"
+echo "latestCmt-> ${latestCmt}"
 packages=$(git diff --name-only ${latestRef} ${latestCmt} -- packages  | awk '{ split($0,a,/\//); print a[1]"/"a[2] }' | uniq )
+
 
 # defin project rootDirectory
 rootDirectory=$(pwd)
