@@ -10,8 +10,8 @@ RUN yarn install --production
 # move node_modules folder into the right place
 RUN mv /usr/todos-service/node_modules /node_modules
 # copy source files (or maybe get it from circleci artefact?)
-COPY ~repo/docker-cache/todos-service/platforms/server /usr/todos-service/platforms/server
+COPY platforms/server /usr/todos-service/platforms/server
 # expose container port
-EXPOSE 3000
+EXPOSE 3001
 # run app in production mode
 CMD ["npm", "run", "start"]
