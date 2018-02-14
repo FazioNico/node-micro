@@ -11,13 +11,16 @@ mkdir docker-cache
 for dir in $packages; do
   # go to microservice folder
   cd $dir
+  echo $(pwd)
   serviceName=$(pwd | sed 's#.*/##')
   echo "[INSTALL] ${serviceName} microservice: packages dependencies"
   # install project dependencies
   docker build -f Dockerfile.dev -t ${serviceName} .
   # save image to docker cache
+  echo "[SAVE DEV IMAGE] ${serviceName} microservice"
   docker save -o $rootDirectory/docker-cache/${serviceName}.tar ${serviceName}
   # return to rootDirectory project
+
   cd $rootDirectory
 done
 
