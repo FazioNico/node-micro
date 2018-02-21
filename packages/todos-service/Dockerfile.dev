@@ -4,11 +4,11 @@ ENV NODE_VERSION 8.9.4
 RUN mkdir -p /usr/todos-service
 WORKDIR /usr/todos-service
 # install -g node modules
-RUN yarn global add typescript webpack nyc mocha
+# RUN yarn global add typescript webpack nyc mocha
 # Copy .npm settings and package.json into container
 COPY package.json /usr/todos-service/package.json
 # install dependencies
-RUN yarn install --silent --non-interactive 
+RUN yarn install --silent --non-interactive
 # move node_modules folder into the right place
 RUN mv /usr/todos-service/node_modules /node_modules
 # copy source files
